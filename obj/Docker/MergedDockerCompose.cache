@@ -1,0 +1,153 @@
+services:
+  adminservice:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: AdminService/Dockerfile
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: AdminService
+    image: shubhamagrawal14/adminservice:latest
+    ports:
+    - published: 9003
+      target: 80
+    - target: 80
+  catalog.api:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: Catalog.Api/Dockerfile
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: Catalog.Api
+    image: shubhamagrawal14/catalogapi:latest
+    ports:
+    - published: 9001
+      target: 80
+    - target: 80
+  eureka:
+    image: steeltoeoss/eurekaserver
+    ports:
+    - published: 8761
+      target: 8761
+  gateway:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: Gateway/Dockerfile
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: shubhamagrawal14/gateway:latest
+    ports:
+    - published: 9000
+      target: 80
+    - target: 80
+  jaeger:
+    environment:
+      LOG_LEVEL: debug
+    image: jaegertracing/all-in-one:latest
+    ports:
+    - protocol: udp
+      published: 5775
+      target: 5775
+    - published: 5778
+      target: 5778
+    - protocol: udp
+      published: 6831
+      target: 6831
+    - protocol: udp
+      published: 6832
+      target: 6832
+    - published: 9411
+      target: 9411
+    - published: 14268
+      target: 14268
+    - published: 16686
+      target: 16686
+  order.api:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: Order.Api/Dockerfile
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: Order.Api
+    image: shubhamagrawal14/orderapi:latest
+    ports:
+    - published: 9002
+      target: 80
+    - target: 80
+  rabbitmq:
+    container_name: rabbitmq
+    hostname: my-rabbit
+    image: rabbitmq:3-management
+    ports:
+    - published: 5672
+      target: 5672
+    - published: 15672
+      target: 15672
+  serviceprovider:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: ServiceProvider/Dockerfile
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: serviceprovider
+    image: shubhamagrawal14/serviceprovider:latest
+    ports:
+    - published: 9004
+      target: 80
+    - target: 80
+version: '3.4'

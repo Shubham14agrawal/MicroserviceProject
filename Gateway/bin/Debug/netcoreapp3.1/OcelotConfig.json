@@ -1,0 +1,80 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/Catalog",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Catalog",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "Catalog.Api",
+      "ServiceName": "Catalog.Api"
+    },
+    {
+      "DownstreamPathTemplate": "/Order",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/PlaceOrder",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "Key": "Order.Api",
+      "ServiceName": "Order.Api"
+    },
+    {
+      "DownstreamPathTemplate": "/getStatus",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Order/GetStatus",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "Key": "OrderStatus.Api",
+      "ServiceName": "Order.Api"
+    },
+    {
+      "DownstreamPathTemplate": "/updateStatus",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Admin/updateStatus",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "Key": "AdminService",
+      "ServiceName": "AdminService"
+    },
+    {
+      "DownstreamPathTemplate": "/GetProviderList",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Admin/GetProviderList",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "Key": "AdminService",
+      "ServiceName": "AdminService"
+    },
+    {
+      "DownstreamPathTemplate": "/SendServiceRequest",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Admin/SendServiceRequest",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "Key": "AdminService",
+      "ServiceName": "AdminService"
+    },
+    {
+      "DownstreamPathTemplate": "/Provider/UpdateStatus",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/Provider/UpdateStatus",
+      "UpstreamHttpMethod": [ "Get", "POST" ],
+      "Key": "serviceprovider",
+      "ServiceName": "serviceprovider"
+    }
+  ],
+
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration",
+    "UseServiceDiscovery": true,
+    "ServiceDiscoveryProvider": {
+      "Type": "Eureka",
+      "Host": "eureka",
+      "Port": "8761"
+    },
+    "RateLimitOptions": {
+      "ClientIdHeader": "ClientId",
+      "QuotaExceededMessage": null,
+      "RateLimitCounterPrefix": "ocelot",
+      "DisableRateLimitHeaders": false,
+      "HttpStatusCode": 429
+    }
+
+    //"BaseUrl": "http://localhost:62583"
+  }
+}

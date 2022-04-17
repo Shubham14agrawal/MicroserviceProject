@@ -1,0 +1,278 @@
+services:
+  adminservice:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: AdminService/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: AdminService
+      target: base
+    container_name: AdminService
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: AdminService
+      NUGET_FALLBACK_PACKAGES: ''
+    image: shubhamagrawal14/adminservice:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/AdminService.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 9003
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment\AdminService:/app:rw
+    - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment:/src:rw
+  catalog.api:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: Catalog.Api/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: Catalog.Api
+      target: base
+    container_name: Catalog.Api
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: Catalog.Api
+      NUGET_FALLBACK_PACKAGES: ''
+    image: shubhamagrawal14/catalogapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/Catalog.Api.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 9001
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment\Catalog.Api:/app:rw
+    - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment:/src:rw
+  eureka:
+    image: steeltoeoss/eurekaserver
+    ports:
+    - published: 8761
+      target: 8761
+  gateway:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: Gateway/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: Gateway
+      target: base
+    container_name: Gateway
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: shubhamagrawal14/gateway:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/Gateway.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 9000
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment\Gateway:/app:rw
+    - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment:/src:rw
+  jaeger:
+    environment:
+      LOG_LEVEL: debug
+    image: jaegertracing/all-in-one:latest
+    ports:
+    - protocol: udp
+      published: 5775
+      target: 5775
+    - published: 5778
+      target: 5778
+    - protocol: udp
+      published: 6831
+      target: 6831
+    - protocol: udp
+      published: 6832
+      target: 6832
+    - published: 9411
+      target: 9411
+    - published: 14268
+      target: 14268
+    - published: 16686
+      target: 16686
+  order.api:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: Order.Api/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: Order.Api
+      target: base
+    container_name: Order.Api
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: Order.Api
+      NUGET_FALLBACK_PACKAGES: ''
+    image: shubhamagrawal14/orderapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/Order.Api.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 9002
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment\Order.Api:/app:rw
+    - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment:/src:rw
+  rabbitmq:
+    container_name: rabbitmq
+    hostname: my-rabbit
+    image: rabbitmq:3-management
+    ports:
+    - published: 5672
+      target: 5672
+    - published: 15672
+      target: 15672
+  serviceprovider:
+    build:
+      context: C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+        Assignment
+      dockerfile: ServiceProvider/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: ServiceProvider
+      target: base
+    container_name: ServiceProvider
+    depends_on:
+      eureka:
+        condition: service_started
+      jaeger:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      JAEGER_AGENT_HOST: jaeger
+      JAEGER_AGENT_PORT: '6831'
+      JAEGER_SAMPLER_PARAM: '1'
+      JAEGER_SAMPLER_TYPE: const
+      JAEGER_SERVICE_NAME: serviceprovider
+      NUGET_FALLBACK_PACKAGES: ''
+    image: shubhamagrawal14/serviceprovider:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/netcoreapp3.1/ServiceProvider.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 9004
+      target: 80
+    - target: 80
+    tty: true
+    volumes:
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment\ServiceProvider:/app:rw
+    - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\shubhamagrawal.NAGARRO\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP
+      Assignment:/src:rw
+version: '3.4'

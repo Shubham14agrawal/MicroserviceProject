@@ -1,0 +1,126 @@
+version: '3.4'
+
+
+services:
+
+  eureka:
+    image: steeltoeoss/eurekaserver
+    ports:
+     - "8761:8761"
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: rabbitmq
+    hostname: my-rabbit
+
+
+  jaeger: 
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411" 
+    environment:
+      - LOG_LEVEL=debug        
+            
+  gateway:
+    image: shubhamagrawal14/gateway:latest
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+    depends_on:
+        - rabbitmq
+        - eureka
+        - jaeger
+    ports:
+      - "9000:80"
+  
+
+  catalog.api:
+    image: shubhamagrawal14/catalogapi:latest
+    build:
+      context: .
+      dockerfile: Catalog.Api/Dockerfile
+    depends_on:
+        - rabbitmq
+        - eureka
+        - jaeger
+    ports:
+      - "9001:80"
+
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - JAEGER_SERVICE_NAME=Catalog.Api
+     - JAEGER_AGENT_HOST=jaeger
+     - JAEGER_AGENT_PORT=6831
+     - JAEGER_SAMPLER_TYPE=const
+     - JAEGER_SAMPLER_PARAM=1
+   
+
+  order.api:
+    image: shubhamagrawal14/orderapi:latest
+    build:
+      context: .
+      dockerfile: Order.Api/Dockerfile
+    depends_on:
+        - rabbitmq
+        - eureka
+        - jaeger
+    ports:
+      - "9002:80"
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - JAEGER_SERVICE_NAME=Order.Api
+     - JAEGER_AGENT_HOST=jaeger
+     - JAEGER_AGENT_PORT=6831
+     - JAEGER_SAMPLER_TYPE=const
+     - JAEGER_SAMPLER_PARAM=1
+
+
+  adminservice:
+    image: shubhamagrawal14/adminservice:latest
+    build:
+      context: .
+      dockerfile: AdminService/Dockerfile
+    depends_on:
+        - rabbitmq
+        - eureka
+        - jaeger
+    ports:
+      - "9003:80"
+
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - JAEGER_SERVICE_NAME=AdminService
+     - JAEGER_AGENT_HOST=jaeger
+     - JAEGER_AGENT_PORT=6831
+     - JAEGER_SAMPLER_TYPE=const
+     - JAEGER_SAMPLER_PARAM=1
+     
+  serviceprovider:
+    image: shubhamagrawal14/serviceprovider:latest
+    build:
+      context: .
+      dockerfile: ServiceProvider/Dockerfile
+    depends_on:
+        - rabbitmq
+        - eureka
+        - jaeger
+    ports:
+      - "9004:80"
+
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - JAEGER_SERVICE_NAME=serviceprovider
+     - JAEGER_AGENT_HOST=jaeger
+     - JAEGER_AGENT_PORT=6831
+     - JAEGER_SAMPLER_TYPE=const
+     - JAEGER_SAMPLER_PARAM=1

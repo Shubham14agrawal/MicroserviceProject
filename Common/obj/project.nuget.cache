@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "P8sPhXOSVr0tQaT+N9zVDyLnIS1wFHuymt6ltI4h3voBHkQG4mKQib81A1qQ9ITPz1+tbPSUNIxAKrO1daP7ZQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\shubhamagrawal.NAGARRO\\Desktop\\Shubham Agrawal_3153798_MicroservicesAssignment\\NAGP\\NAGP Assignment\\Common\\Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shubhamagrawal.NAGARRO\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\shubhamagrawal.NAGARRO\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

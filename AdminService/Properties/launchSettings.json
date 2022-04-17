@@ -1,0 +1,50 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:54814",
+      "sslPort": 0
+    }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "adminService",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "AdminService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "adminService",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5000"
+    },
+    "Eureka_Client_DotNet": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "adminService",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "Docker": {
+        "commandName": "Docker",
+        "launchBrowser": "true",
+        "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/adminService",
+        "publishAllPorts": "true"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/adminService",
+      "publishAllPorts": true
+    }
+  }
+}

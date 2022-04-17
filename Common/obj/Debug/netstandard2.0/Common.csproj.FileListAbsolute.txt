@@ -1,0 +1,10 @@
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\bin\Debug\netstandard2.0\Common.deps.json
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\bin\Debug\netstandard2.0\Common.dll
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\bin\Debug\netstandard2.0\Common.pdb
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.csproj.AssemblyReference.cache
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.AssemblyInfoInputs.cache
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.AssemblyInfo.cs
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.dll
+C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Common\obj\Debug\netstandard2.0\Common.pdb

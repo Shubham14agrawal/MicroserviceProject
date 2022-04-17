@@ -1,0 +1,141 @@
+version: '3.4'
+
+services:
+  adminservice:
+    image: shubhamagrawal14/adminservice:dev
+    container_name: AdminService
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "AdminService"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\AdminService:/app
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment:/src
+      - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages\:/root/.nuget/packages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/netcoreapp3.1/AdminService.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+  catalog.api:
+    image: shubhamagrawal14/catalogapi:dev
+    container_name: Catalog.Api
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "Catalog.Api"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Catalog.Api:/app
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment:/src
+      - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages\:/root/.nuget/packages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/netcoreapp3.1/Catalog.Api.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+
+  gateway:
+    image: shubhamagrawal14/gateway:dev
+    container_name: Gateway
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "Gateway"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Gateway:/app
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment:/src
+      - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages\:/root/.nuget/packages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/netcoreapp3.1/Gateway.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+
+  order.api:
+    image: shubhamagrawal14/orderapi:dev
+    container_name: Order.Api
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "Order.Api"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\Order.Api:/app
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment:/src
+      - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages\:/root/.nuget/packages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/netcoreapp3.1/Order.Api.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+
+  serviceprovider:
+    image: shubhamagrawal14/serviceprovider:dev
+    container_name: ServiceProvider
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "ServiceProvider"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=
+    volumes:
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment\ServiceProvider:/app
+      - C:\Users\shubhamagrawal.NAGARRO\Desktop\Shubham Agrawal_3153798_MicroservicesAssignment\NAGP\NAGP Assignment:/src
+      - C:\Users\shubhamagrawal.NAGARRO\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\shubhamagrawal.NAGARRO\.nuget\packages\:/root/.nuget/packages:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /root/.nuget/packages  \"/app/bin/Debug/netcoreapp3.1/ServiceProvider.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
